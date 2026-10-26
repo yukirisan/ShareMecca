@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン画面</title>
+</head>
+<body>
+    <h1>聖地巡礼マップ</h1> 
+    <h2>ログイン</h2>
+    <form>
+        <p>
+            <label for="email">メールアドレス</label>
+            <input id="email" type="useremail" name="email">
+        </p>
+
+
+        <p>
+            <label for="password">パスワード</label>
+            <input type="password" id="password" name="password">
+
+            <button type="button" id="togglePassword">
+                表示
+            </button>
+        </p>
+
+        <script>
+            const password = document.getElementById("password");
+            const toggleButton = document.getElementById("togglePassword");
+
+            toggleButton.addEventListener("click", function() {
+                if (password.type === "password") {
+                    password.type = "text";
+                    toggleButton.textContent = "非表示";
+                } else {
+                    password.type = "password";
+                    toggleButton.textContent = "表示";
+                }
+            });
+        </script>
+
+        
+        <p>
+            <button type="submit">ログイン</button>
+        </p>
+
+        <p>
+            <a href="register.html">新規登録</a>
+        </p>
+    </form>
+</body>
+</html>
