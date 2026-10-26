@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaflet Map サンプル</title>
+
+    <!-- 1. LeafletのCSSを読み込む -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+
+    <!-- 2. LeafletのJavaScriptを読み込む（CSSの読み込みより後ろに書く） -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <!-- 3. 地図を表示する領域（div）の大きさを指定する -->
+    <style>
+        #map {
+            height: 500px; /* 高さを指定しないと地図が表示されません */
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>はじめてのLeaflet地図</h1>
+    <!-- 地図を表示するコンテナ -->
+    <div id="map"></div>
+
+    <script>
+        // 4. 地図の初期化（緯度・経度、ズームレベルを指定）
+        // サンプルでは東京駅周辺（緯度: 35.681236, 経度: 139.767125）を指定しています
+        var map = L.map('map').setView([35.681236, 139.767125], 13);
+
+        // 5. 背景となる地図タイル（OpenStreetMap）を追加する
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // 6. マーカー（ピン）とポップアップを追加する
+        var marker = L.marker([35.681236, 139.767125]).addTo(map);
+        marker.bindPopup("<b>東京駅</b><br>ここにいます！").openPopup();
+    </script>
+
+</body>
+</html>

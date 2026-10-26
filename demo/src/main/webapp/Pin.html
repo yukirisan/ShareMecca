@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaflet クリックでピン立て</title>
+
+    <!-- LeafletのCSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+
+    <!-- LeafletのJavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+        /* 使い方をわかりやすくするためのスタイル */
+        #info {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>地図をクリックしてピンを立ててみよう！</h1>
+    <div id="map"></div>
+    <div id="info">地図上の好きな場所をクリックしてください。</div>
+
+    <script>
+        // 1. 地図の初期化（東京駅周辺）
+        var map = L.map('map').setView([35.681236, 139.767125], 13);
+
+        // 2. 背景地図タイルの追加
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // 3. 【ここがポイント】地図がクリックされたときのイベント処理
+        map.on('click', function(e) {
+            // クリックされた場所の緯度・経度を取得
+            var lat = e.latlng.lat;
+            var lng = e.latlng.lng;
+
+            // 取得した緯度・経度を使ってマーカー（ピン）を新しく追加する
+            var marker = L.marker([lat, lng]).addTo(map);
+
+            // ポップアップを追加して、クリックされた座標を表示する
+            marker.bindPopup("<b>選択した場所</b><br>緯度: " + lat.toFixed(4) + "<br>経度: " + lng.toFixed(4)).openPopup();
+
+            // 画面下の文字を更新する
+            document.getElementById('info').innerText = "最後にピンを立てた場所：緯度 " + lat.toFixed(4) + ", 経度 " + lng.toFixed(4);
+        });
+    </script>
+
+</body>
+</html>
