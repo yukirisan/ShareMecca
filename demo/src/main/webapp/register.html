@@ -9,7 +9,39 @@
     <h1>新規登録</h1>    
     
     <form>
+        <div class="form-group">
+            <label for="email">メールアドレス</label>
+            <input id="email" type="email" name="email" required>
+        </div>
 
+
+        <div class="form-group">
+            <label for="password">パスワード</label>
+            <input id="password" type="password" name="password" required>
+
+            <button type="button" id="togglePassword">
+                表示
+            </button>
+        </div>
+
+        <script>
+            const password = document.getElementById("password");
+            const toggleButton = document.getElementById("togglePassword");
+
+            toggleButton.addEventListener("click", function() {
+                if (password.type === "password") {
+                    password.type = "text";
+                    toggleButton.textContent = "非表示";
+                } else {
+                    password.type = "password";
+                    toggleButton.textContent = "表示";
+                }
+            });
+        </script>
+        
+        <p>
+            <button type="submit">新規登録</button>
+        </p>
 
     </form>
 </body>
